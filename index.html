@@ -33,13 +33,16 @@
             body{
                 background: #6FC8A8 !important;
                 font-family: 'Nunito', sans-serif;
+                user-select: none !important;
+            }
+            .bg-echo{
+                background-color: #6FC8A8 !important;
             }
             *{
                 text-decoration: none !important;
                 list-style: none !important;
             }
             img{
-                user-select: none !important;
                 pointer-events: none !important;
             }
             #searchIcon{
@@ -100,11 +103,14 @@
                 background-color: #e26563 !important;
                 box-shadow: #e26563 0px 1px 10px;
             }
-            .form-control{
+            .btn-share{
+                margin: .3rem 0 !important;
+            }
+            #search{
                 border: 5px solid silver !important;
             }
-            .form-control:active,
-            .form-control:focus{
+            #search:active,
+            #search:focus{
                 box-shadow: none !important;
             }
 
@@ -113,7 +119,7 @@
                 .track-card .content{
                     margin: 0 20% !important;
                 }
-                .form-control{
+                #search{
                     max-width: 50rem;
                     margin:  0 15rem;
                 }
@@ -209,6 +215,13 @@
                 z-index: 99999;
                 right: 0px;
             }
+            .social-icons .social-icon{
+                font-size: 24px;
+                padding: .5rem .8rem;
+                border-radius: 50%;
+                object-fit: cover;
+                object-position: center right;
+            }
 
     </style>
 </head>
@@ -228,15 +241,16 @@
          </svg>
        </a> 
     <div class="container flex justify-content-center">
-            <div class="text-white text-center hero"><img class="img-fluid" src="echo.png" alt="" loading="lazy"><h1>Echo DB <i class="bi bi-music-note-list"></i> </h1>
+            <div class="text-white text-center hero"><img class="img-fluid" src="echo.png" alt="" loading="lazy"><h1>Echo DB <i class="bi bi-music-note-list"></i>
+                <button class="btn btn-listen btn-sm rounded-pill btn-share align-middle" data-bs-toggle="modal" data-bs-target="#shareModal"><i class="bi bi-share-fill"></i> Share</button> </h1>
             <h3>Search for the song you like... </h3>
-            <p class="d-none d-lg-block"><span class="badge bg-dark">ctrl</span> + <span class="badge bg-dark">F</span> = Focus Search Bar, <span class="badge bg-dark">Enter ↵</span> = Submit Search</p>
+            <p class="d-none d-lg-block shortcuts"><span class="badge bg-dark">ctrl</span> + <span class="badge bg-dark">F</span> = Focus Search Bar, <span class="badge bg-dark">Enter ↵</span> = Submit Search</p>
             </div>
                 <div class="input-group">
                     <input type="search" id="search" class="form-control rounded-pill" autocomplete="off">
                     <i class="bi bi-search" id="searchIcon"></i>
                 </div>
-                <div class="text-center mt-4"><button class="btn btn-listen" id="searchBtn">Search</button></div>
+                <div class="text-center mt-4"><button class="btn btn-listen rounded-pill" id="searchBtn">Search</button></div>
                 
     </div>
     <footer class="text-center text-white"><strong>&copy; Echo DB <span class="currentYear"></span><br>Developed by <a href="http://beinghuman.myartsonline.com" class="text-echo" rel="noopener noreferrer" target="_blank">Radhe Shyam Salopanthula</a></strong></footer>
@@ -247,6 +261,33 @@
         <div class="modals">
             
         </div>
+  
+  <!--Share Modal -->
+  <div class="modal fade mt-5" id="shareModal" tabindex="-1" aria-labelledby="shareLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="shareLabel">Share</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="text-center mb-5">
+              <h4><b>Share this web App with your friends</b></h4>
+              <ul class="social-icons list-inline mt-3">
+                <li class="social-icon list-inline-item bg-echo"><a href="#" class="bi bi-whatsapp text-white" target="_blank"></a></li>
+                <li class="social-icon list-inline-item bg-echo text-white"><a href="#" class="bi bi-facebook text-white" target="_blank"></a></li>
+                <li class="social-icon list-inline-item bg-echo text-white"><a href="#" class="bi bi-twitter text-white" target="_blank"></a></li>
+                <li class="social-icon list-inline-item bg-echo text-white"><a href="#" class="bi bi-linkedin text-white" target="_blank"></a></li>
+              </ul>
+          </div>
+            <div class="input-group">
+              <input type="url" class="form-control" id="shareUrl" readonly>
+              <button class="btn btn-danger" type="button" id="copyBtn" onclick="copyToClipboard()">copy</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <!-- 
         <div class="results">
@@ -297,24 +338,6 @@
     <a id="scrollTop" class="bi bi-caret-up-fill"></a>
 
     <script>
-
-            //ScrollTop
-            var scrollTopbtn = $('#scrollTop');
-
-                $(window).scroll(function() {
-                if ($(window).scrollTop() > 300) {
-                    scrollTopbtn.addClass('show');
-                } else {
-                    scrollTopbtn.removeClass('show');
-                }
-                });
-
-                scrollTopbtn.on('click', function(e) {
-                e.preventDefault();
-                $('html, body').animate({scrollTop:0}, '300');
-                });
-
-
             var currentYearSpan = document.querySelector(".currentYear")
             var currentDate = new Date() 
             var currentYear = currentDate.getFullYear()
@@ -322,17 +345,15 @@
             var searchInput = document.querySelector('#search')
             var searchBtn = document.querySelector("#searchBtn")
             var shortcutsModal = document.querySelector("#shortcutsModal")
-            
-             addEventListener("keydown",function(e){
-                 if(e.ctrlKey && e.keyCode == "70"){
-                      e.preventDefault()
-                      searchInput.focus()
-                    }
-                 if(e.keyCode == "13"){
-                     e.preventDefault()
-                     searchBtn.click()
-                 }
-             })
+            var shareUrl = document.querySelector("#shareUrl") 
+            var copyBtn = document.querySelector("#copyBtn")
+            var whatsapp = document.querySelector(".bi-whatsapp")
+            var facebook = document.querySelector(".bi-facebook")
+            var twitter = document.querySelector(".bi-twitter")
+            var linkedin = document.querySelector(".bi-linkedin")
+                var getUrl =  window.location.href
+                shareUrl.value = getUrl
+                
             searchBtn.addEventListener('click', function(){                
                     var request = new XMLHttpRequest()
                     var trackCard = document.querySelector(".results")
@@ -369,6 +390,43 @@
 
                     request.send()        
             })
+
+                whatsapp.href = "https://wa.me/?text=Check out Echo DB. *Echo DB* is A platform to search and listen to any song you like on any platform you love. Search, Listen and Enjoy! "+getUrl
+                facebook.href = "https://www.facebook.com/sharer/sharer.php?u="+getUrl+"&quote=Check out Echo DB. Echo DB is A platform to search and listen to any song you like on any platform you love. Search, Listen and Enjoy!"
+                twitter.href = "https://twitter.com/intent/tweet?text=Check out Echo DB. Echo DB is A platform to search and listen to any song you like on any platform you love. Search, Listen and Enjoy! by @beinghumanmuzic&url="+getUrl
+                linkedin.href = "https://www.linkedin.com/cws/share?url="+getUrl
+                copyBtn.addEventListener('click',function(){
+                    shareUrl.select()
+                    shareUrl.setSelectionRange(0, 99999)
+                    document.execCommand("copy")               
+                    copyBtn.innerHTML = "Copied!"
+                })
+            
+             addEventListener("keydown",function(e){
+                 if(e.ctrlKey && e.keyCode == "70"){
+                      e.preventDefault()
+                      searchInput.focus()
+                    }
+                 if(e.keyCode == "13"){
+                     e.preventDefault()
+                     searchBtn.click()
+                 }
+             })
+            //ScrollTop
+            var scrollTopbtn = $('#scrollTop');	
+
+                $(window).scroll(function() {
+                if ($(window).scrollTop() > 300) {
+                    scrollTopbtn.addClass('show');
+                } else {
+                    scrollTopbtn.removeClass('show');
+                }
+                });
+
+                scrollTopbtn.on('click', function(e) {
+                e.preventDefault();
+                $('html, body').animate({scrollTop:0}, '300');
+                });
     </script>
 </body>
 </html>
