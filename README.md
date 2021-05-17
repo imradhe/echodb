@@ -1,6 +1,6 @@
 # **Echo DB**
 Welcome to Echo DB where you can search for any song you like and find the links to that song on any platform you love. Search, Listen and Enjoy.
-Here is the link for the we app [Echo DB](https://echodb.netlify.app/)
+Here is the link for the we app [Echo DB](https://echodb.netlify.app/) or on [Github Pages](https://imradhe.github.io/echodb)
 
 
 
