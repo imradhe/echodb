@@ -39,7 +39,8 @@
                 list-style: none !important;
             }
             img{
-                user-select: text !important;
+                user-select: none !important;
+                pointer-events: none !important;
             }
             #searchIcon{
                 font-size: larger !important;
@@ -80,6 +81,7 @@
                 color: white !important;
                 border: none !important;
                 font-weight: bolder !important;
+                user-select: none !important;
             }
             .text-echo{
                 color: #e26563 !important;
@@ -141,10 +143,10 @@
                     font-size: 18px;
                 }
                 .artworkImg{
-                    height: 100px !important;
+                    height: 120px !important;
                 }
             }
-            /* Small Screen */
+            /*Extra Small Screen */
             @media only screen and (max-width: 440px) {
                 .track-card button{
                     margin-top: -2rem !important;
@@ -155,6 +157,9 @@
                 }
                 .artistName{
                     font-size: 14px;
+                }
+                .artworkImg{
+                    height: 100px !important;
                 }
             }
 
@@ -234,7 +239,7 @@
                 <div class="text-center mt-4"><button class="btn btn-listen" id="searchBtn">Search</button></div>
                 
     </div>
-    <footer class="text-center text-white"><strong>&copy; Echo DB <span class="currentYear"></span><br>Developed by <a href="http://beinghuman.myartsonline.com" class="text-echo" target="_blank">Radhe Shyam Salopanthula</a></strong></footer>
+    <footer class="text-center text-white"><strong>&copy; Echo DB <span class="currentYear"></span><br>Developed by <a href="http://beinghuman.myartsonline.com" class="text-echo" rel="noopener noreferrer" target="_blank">Radhe Shyam Salopanthula</a></strong></footer>
     <div class="container mt-5">
         <h3 class="text-center"><b class="border-bottom border-3 text-white resultTitle"></b></h3>
         <div class="results">
@@ -242,20 +247,52 @@
         <div class="modals">
             
         </div>
-        <!-- <div class="results">
+
+<!-- 
+        <div class="results">
             <div class="track-card">
-                    <div class="content"data-bs-toggle="modal" data-bs-target="#track'+(i+1)+'">
+                    <div class="content"data-bs-toggle="modal" data-bs-target="#track1">
                             <div class="artwork"><img class="artworkImg" src="https://via.placeholder.com/100">
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#track'+(i+1)+'" class="btn btn-listen">Listen</button>
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#track1" class="btn btn-listen">Listen</button>
                             </div>
                             <div class="meta">
                                 <h5><b class="trackName">Track Name</a></b></h5>
-                                <h6><b class="albumName">Album Name</a></b></h6>
                                 <h5 class="artistName">Artist Name</h5>
                             </div>
                         </div>
         </div>
-    </div> -->
+    </div>
+
+    <div class="modal fade" id="track1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog"><div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Listen Now</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <iframe loading="lazy" width="100%" height="300" src="https://embed.song.link/?url=https://music.apple.com/us/album/imagine/1440853752?i=1440853776&amp;uo=4&amp;theme=light" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-presentation allow-popups allow-popups-to-escape-sandbox"></iframe>
+                <div class="accordion" id="details">
+                    <div class="accordion-item"> 
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1"> Song Details</button></h2>
+                            <div id="collapse1" class="accordion-collapse hide collapse hide" aria-labelledby="headingOne" data-bs-parent="#details">
+                                <div class="accordion-body">
+                                    <table class="table"><tbody><tr><td>Song</td><td>Mark</td></tr><tr><td>Album</td><td>Mark</td></tr><tr><td>Artist</td><td>Mark</td></tr><tr><td>Genre</td><td>Mark</td></tr><tr><td>Release Date</td><td>Mark</td></tr></tbody></table>
+                                    <ul>
+                                        <li>Song - Imagine</li
+                                            ><li>Album - Imagine</li>
+                                            <li>Artist(s) - John Lennon</li>
+                                            <li>Genre - Pop</li>
+                                            <li>Release Date - Thu Sep 09 1971</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
     
     <a id="scrollTop" class="bi bi-caret-up-fill"></a>
 
@@ -320,7 +357,7 @@
                                 for (var i = 0; i < data.resultCount; i++) {
                                         var releaseDateFull = new Date(data.results[i].releaseDate)
                                         var releaseDate = String(releaseDateFull).substr(0,15)
-                                        modals.innerHTML += '<div class="modal fade" id="track'+(i+1)+'" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Listen Now</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><iframe loading="lazy" width="100%" height="300" src="https://embed.song.link/?url='+data.results[i].trackViewUrl+'&theme=light" frameborder="0" allowfullscreen sandbox="allow-same-origin allow-scripts allow-presentation allow-popups allow-popups-to-escape-sandbox"></iframe><div class="accordion" id="details"><div class="accordion-item"> <h2 class="accordion-header" id="headingOne"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse'+(i+1)+'" aria-expanded="false" aria-controls="collapse'+(i+1)+'"> Song Details</button></h2><div id="collapse'+(i+1)+'" class="accordion-collapse collapse hide" aria-labelledby="headingOne" data-bs-parent="#details"><div class="accordion-body"><ul><li>Song - '+data.results[i].trackName+'</li><li>Album - '+data.results[i].collectionName+'</li><li>Artist(s) - '+data.results[i].artistName+'</li></li><li>Genre - '+data.results[i].primaryGenreName+'</li><li>Release Date - '+releaseDate+'</li></ul></div></div></div></div></div></div></div></div>'
+                                        modals.innerHTML += '<div class="modal fade" id="track'+(i+1)+'" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Listen Now</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><iframe loading="lazy" width="100%" height="300" src="https://embed.song.link/?url='+data.results[i].trackViewUrl+'&theme=light" frameborder="0" allowfullscreen sandbox="allow-same-origin allow-scripts allow-presentation allow-popups allow-popups-to-escape-sandbox"></iframe><div class="accordion" id="details"><div class="accordion-item"> <h2 class="accordion-header" id="headingOne"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse'+(i+1)+'" aria-expanded="false" aria-controls="collapse'+(i+1)+'"> Song Details</button></h2><div id="collapse'+(i+1)+'" class="accordion-collapse collapse hide" aria-labelledby="headingOne" data-bs-parent="#details"><div class="accordion-body"><table class="table"><tbody><tr><td>Song</td><td>'+data.results[i].trackName+'</td></tr><tr><td>Album</td><td>'+data.results[i].collectionName+'</td></tr><tr><td>Artist</td><td>'+data.results[i].artistName+'</td></tr><tr><td>Genre</td><td>'+data.results[i].primaryGenreName+'</td></tr><tr><td>Release Date</td><td>'+releaseDate+'</td></tr></tbody></table></div></div></div></div></div></div></div></div>'
                                         }  
                                 resultTitle.innerHTML += "Results ("+i+")"
                             }                                
