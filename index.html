@@ -33,6 +33,7 @@
             }
             *{
                 text-decoration: none !important;
+                list-style: none !important;
             }
             img{
                 user-select: text !important;
@@ -171,6 +172,7 @@
                 <div class="text-center mt-4"><button class="btn btn-listen" id="searchBtn">Search</button></div>
                 
     </div>
+    <footer class="text-center text-white"><strong>&copy; Echo DB <span class="currentYear"></span></strong></footer>
     <div class="container mt-5">
         <h3 class="text-center"><b class="border-bottom border-3 text-white resultTitle"></b></h3>
         <div class="results">
@@ -194,6 +196,10 @@
     </div> -->
     
     <script>
+            var currentYearSpan = document.querySelector(".currentYear")
+            var currentDate = new Date() 
+            var currentYear = currentDate.getFullYear()
+            currentYearSpan.innerHTML = currentYear
             var searchInput = document.querySelector('#search')
             var searchBtn = document.querySelector("#searchBtn")
             var shortcutsModal = document.querySelector("#shortcutsModal")
@@ -213,7 +219,7 @@
                     var trackCard = document.querySelector(".results")
                     var modals = document.querySelector(".modals")
                     var resultTitle = document.querySelector('.resultTitle')
-                    var searchUrl = 'http://itunes.apple.com/search?term='+searchInput.value+"&entity=song&limit=20"
+                    var searchUrl = 'https://itunes.apple.com/search?term='+searchInput.value+"&entity=song&limit=20"
                     request.open('GET', searchUrl, true)
                     request.onload = function () {
                     // Begin accessing JSON data here
@@ -230,7 +236,9 @@
                                         trackCard.innerHTML += '<div class="track-card"><div class="content"data-bs-toggle="modal" data-bs-target="#track'+(i+1)+'"><div class="artwork"><img class="artworkImg" height="150px" src="'+data.results[i].artworkUrl100+'" alt="'+data.results[i].trackName+'\'s artwork"><button type="button" data-bs-toggle="modal" data-bs-target="#track'+(i+1)+'" class="btn btn-listen">Listen</button></div><div class="meta"><h5><b class="trackName">'+data.results[i].trackName+'</a></b></h5><h6><b class="albumName">'+data.results[i].collectionName+'</a></b></h6><h5 class="artistName">'+data.results[i].artistName+'</h5></div></div>'
                                         }
                                 for (var i = 0; i < data.resultCount; i++) {
-                                        modals.innerHTML += '<div class="modal fade" id="track'+(i+1)+'" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Listen '+data.results[i].trackName+'</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><iframe loading="lazy" width="100%" height="300" src="https://embed.song.link/?url='+data.results[i].trackViewUrl+'&theme=light" frameborder="0" allowfullscreen sandbox="allow-same-origin allow-scripts allow-presentation allow-popups allow-popups-to-escape-sandbox"></iframe></div></div></div></div>'
+                                        var releaseDateFull = new Date(data.results[i].releaseDate)
+                                        var releaseDate = String(releaseDateFull).substr(0,15)
+                                        modals.innerHTML += '<div class="modal fade" id="track'+(i+1)+'" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Listen Now</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><iframe loading="lazy" width="100%" height="300" src="https://embed.song.link/?url='+data.results[i].trackViewUrl+'&theme=light" frameborder="0" allowfullscreen sandbox="allow-same-origin allow-scripts allow-presentation allow-popups allow-popups-to-escape-sandbox"></iframe><div class="accordion" id="details"><div class="accordion-item"> <h2 class="accordion-header" id="headingOne"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse'+(i+1)+'" aria-expanded="false" aria-controls="collapse'+(i+1)+'"> Song Details</button></h2><div id="collapse'+(i+1)+'" class="accordion-collapse collapse hide" aria-labelledby="headingOne" data-bs-parent="#details"><div class="accordion-body"><ul><li>Song - '+data.results[i].trackName+'</li><li>Album - '+data.results[i].collectionName+'</li><li>Artist - '+data.results[i].artistName+'</li></li><li>Genre - '+data.results[i].primaryGenreName+'</li><li>Release Date - '+releaseDate+'</li></ul></div></div></div></div></div></div></div></div>'
                                         }  
                                 resultTitle.innerHTML += "Results ("+i+")"
                             }                                
