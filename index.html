@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
+    <link rel="icon" href="echo-main.png" type="image/png">
+    <title>Echo DB</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.13.0/css/all.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <meta content="Welcome to Echo DB where you can search for any song you like and find the links to that song on any platform you love. Search, Listen and Enjoy." name="description">
+    <meta content="Echo DB, Songs Search, Apple Music Search, Albums Search, Tunes Search, iTunes Search, Apple Music Search, Spotify Search, Music Search, Radhe Shyam Salopanthula, Radhe Shyam, Radhe Shyam Echo DB, Dark Sparrows, Dark Sparrows India" name="keywords">
+
+
+    
+  		<!-- Open Graph Tags -->
+		<meta property="og:title" content="Echo DB - Search for the song you like"/>
+		<meta property="og:type" content="home"/>
+		<meta property="og:image" content="echo-main.png"/>
+		<meta property="og:description" content="Welcome to Echo DB where you can search for any song you like and find the links to that song on any platform you love. Search, Listen and Enjoy."/>
+		<meta property="og:locale" content="en_US" />
+		<meta property="og:site_name" content="Echo DB"/>
+		<meta property="og:image:type" content="image/png"/>
+		<meta property="og:image:width" content="512"/>
+		<meta property="og:image:height" content="512"/>
+		<!-- End Graph Tags -->
+
+    <style>
+            body{
+                background: #6FC8A8 !important;
+            }
+            *{
+                text-decoration: none !important;
+            }
+            img{
+                user-select: text !important;
+            }
+            #searchIcon{
+                position: absolute;
+                right:  14px;
+                top: 14px;
+            }
+            .hero img{
+                height: 10rem;
+                margin: 5rem 0 0;
+            }
+            .hero h1{
+                margin: 1rem 0;
+            }
+            .track-card{
+                display: flex;
+                flex-direction: column;
+            }
+            .track-card .content{
+                display: flex;
+                justify-content: left;
+                align-items: center;
+                cursor: pointer !important;
+                padding: 1rem;
+            }
+            .track-card .artwork{
+                align-self: baseline;
+                display: flex;
+                flex-direction: column;
+            }
+            .track-card .meta{
+                align-self: center !important;
+                margin-left: 1rem;
+            }
+            .btn-listen{
+                margin: -2rem 1rem 0 !important;
+                background-color: #d35351 !important;
+                color: white !important;
+                border: none !important;
+                font-weight: bolder !important;
+            }
+            .btn-listen:hover,
+            .btn-listen:focus,
+            .btn-listen:active{
+                background-color: #e26563 !important;
+                box-shadow: none !important;
+            }
+            .form-control{
+                border: 5px solid silver !important;
+            }
+            .form-control:active,
+            .form-control:focus{
+                box-shadow: none !important;
+            }
+
+            /* large Screen */
+            @media only screen and (min-width: 991px) {
+                .track-card .content{
+                    margin: 0 20% !important;
+                }
+                .form-control{
+                    max-width: 50rem;
+                    margin:  0 15rem;
+                }
+                #searchIcon{
+                    right: 17rem;
+                }
+                .artworkImg{
+                    height: 150px;
+                }
+                .trackName{
+                    font-size: 28px;
+                }
+                .albumName{
+                    font-size: 20px;
+                }
+                .artistName{
+                    font-size: 20px;
+                }
+            }
+            /* Small Screen */
+            @media only screen and (max-width: 991px) {
+                .track-card button{
+                    margin-top: -2rem !important;
+                    margin: -1rem 1rem 0;
+                }
+                .trackName{
+                    font-size: 24px;
+                }
+                .albumName{
+                    font-size: 18px;
+                }
+                .artistName{
+                    font-size: 18px;
+                }
+                .artworkImg{
+                    height: 100px !important;
+                }
+            }
+            /* Small Screen */
+            @media only screen and (max-width: 440px) {
+                .track-card button{
+                    margin-top: -2rem !important;
+                    margin: -2rem 1rem 0;
+                }
+                .trackName{
+                    font-size: 18px;
+                }
+                .albumName{
+                    font-size: 14px;
+                }
+                .artistName{
+                    font-size: 14px;
+                }
+            }
+
+            @media only screen and (max-width: 300px) {
+                .trackName{
+                    font-size: 16px;
+                }
+            }
+    </style>
+</head>
+<body class="bg-echo">
+    <div class="container flex justify-content-center">
+            <div class="text-white text-center hero"><img class="img-fluid" src="echo.png" alt="" loading="lazy"><h1>Echo DB</h1>
+            <h3>Search for the song you like...</h3>
+            <p class="d-none d-lg-block"><span class="badge bg-dark">ctrl</span> + <span class="badge bg-dark">F</span> = Focus Search Bar, <span class="badge bg-dark">Enter ↵</span> = Submit Search</p>
+            </div>
+                <div class="input-group">
+                    <input type="search" id="search" class="form-control rounded-pill" autocomplete="off">
+                    <i class="fa fa-search" id="searchIcon"></i>
+                </div>
+                <div class="text-center mt-4"><button class="btn btn-listen" id="searchBtn">Search</button></div>
+                
+    </div>
+    <div class="container mt-5">
+        <h3 class="text-center"><b class="border-bottom border-3 text-white resultTitle"></b></h3>
+        <div class="results">
+        </div>
+        <div class="modals">
+            
+        </div>
+        <!-- <div class="results">
+            <div class="track-card">
+                    <div class="content"data-bs-toggle="modal" data-bs-target="#track'+(i+1)+'">
+                            <div class="artwork"><img class="artworkImg" src="https://via.placeholder.com/100">
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#track'+(i+1)+'" class="btn btn-listen">Listen</button>
+                            </div>
+                            <div class="meta">
+                                <h5><b class="trackName">Track Name</a></b></h5>
+                                <h6><b class="albumName">Album Name</a></b></h6>
+                                <h5 class="artistName">Artist Name</h5>
+                            </div>
+                        </div>
+        </div>
+    </div> -->
+    
+    <script>
+            var searchInput = document.querySelector('#search')
+            var searchBtn = document.querySelector("#searchBtn")
+            var shortcutsModal = document.querySelector("#shortcutsModal")
+            
+             addEventListener("keydown",function(e){
+                 if(e.ctrlKey && e.keyCode == "70"){
+                      e.preventDefault()
+                      searchInput.focus()
+                    }
+                 if(e.keyCode == "13"){
+                     e.preventDefault()
+                     searchBtn.click()
+                 }
+             })
+            searchBtn.addEventListener('click', function(){                
+                    var request = new XMLHttpRequest()
+                    var trackCard = document.querySelector(".results")
+                    var modals = document.querySelector(".modals")
+                    var resultTitle = document.querySelector('.resultTitle')
+                    var searchUrl = 'http://itunes.apple.com/search?term='+searchInput.value+"&entity=song&limit=20"
+                    request.open('GET', searchUrl, true)
+                    request.onload = function () {
+                    // Begin accessing JSON data here
+                    var data = JSON.parse(this.response)
+                        resultTitle.innerHTML = ""
+                        trackCard.innerHTML = ""
+                        modals.innerHTML = ""
+
+                    if (request.status >= 200 && request.status < 400) {        
+                            if(data.resultCount == 0){
+                                resultTitle.innerHTML += "<p class='border-none'>No Results found<br>Check the spelling and try again</p>"
+                            }else{
+                                for (var i = 0; i < data.resultCount; i++) {
+                                        trackCard.innerHTML += '<div class="track-card"><div class="content"data-bs-toggle="modal" data-bs-target="#track'+(i+1)+'"><div class="artwork"><img class="artworkImg" height="150px" src="'+data.results[i].artworkUrl100+'" alt="'+data.results[i].trackName+'\'s artwork"><button type="button" data-bs-toggle="modal" data-bs-target="#track'+(i+1)+'" class="btn btn-listen">Listen</button></div><div class="meta"><h5><b class="trackName">'+data.results[i].trackName+'</a></b></h5><h6><b class="albumName">'+data.results[i].collectionName+'</a></b></h6><h5 class="artistName">'+data.results[i].artistName+'</h5></div></div>'
+                                        }
+                                for (var i = 0; i < data.resultCount; i++) {
+                                        modals.innerHTML += '<div class="modal fade" id="track'+(i+1)+'" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Listen '+data.results[i].trackName+'</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><iframe loading="lazy" width="100%" height="300" src="https://embed.song.link/?url='+data.results[i].trackViewUrl+'&theme=light" frameborder="0" allowfullscreen sandbox="allow-same-origin allow-scripts allow-presentation allow-popups allow-popups-to-escape-sandbox"></iframe></div></div></div></div>'
+                                        }  
+                                resultTitle.innerHTML += "Results ("+i+")"
+                            }                                
+
+                    } else {
+                        console.log('error')
+                    }
+                    }
+
+                    request.send()        
+            })
+    </script>
+</body>
+</html>
