@@ -20,7 +20,439 @@
 		<meta property="og:title" content="Echo DB - Search for the song you like"/>
 		<meta property="og:type" content="home"/>
 		<meta property="og:image" content="echo-main.png"/>
+		<meta property="og:description" content="Welcome to Echo DB where you can search for any song you like and find the l<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
+    <link rel="icon" href="echo-main.png" type="image/png">
+    <title>Echo DB</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <meta content="Welcome to Echo DB where you can search for any song you like and find the links to that song on any platform you love. Search, Listen and Enjoy." name="description">
+    <meta content="Echo DB, Songs Search, Apple Music Search, Albums Search, Tunes Search, iTunes Search, Apple Music Search, Spotify Search, Music Search, Radhe Shyam Salopanthula, Radhe Shyam, Radhe Shyam Echo DB, Dark Sparrows, Dark Sparrows India" name="keywords">
+
+
+    
+  		<!-- Open Graph Tags -->
+		<meta property="og:title" content="Echo DB - Search for the song you like"/>
+		<meta property="og:type" content="home"/>
+		<meta property="og:image" content="echo-main.png"/>
 		<meta property="og:description" content="Welcome to Echo DB where you can search for any song you like and find the links to that song on any platform you love. Search, Listen and Enjoy."/>
+		<meta property="og:locale" content="en_US" />
+		<meta property="og:site_name" content="Echo DB"/>
+		<meta property="og:image:type" content="image/png"/>
+		<meta property="og:image:width" content="512"/>
+		<meta property="og:image:height" content="512"/>
+		<!-- End Graph Tags -->
+
+    <style>
+            @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap');
+            body{
+                background: #6FC8A8 !important;
+                font-family: 'Nunito', sans-serif;
+                user-select: none !important;
+            }
+            .bg-echo{
+                background-color: #6FC8A8 !important;
+            }
+            *{
+                text-decoration: none !important;
+                list-style: none !important;
+            }
+            img{
+                pointer-events: none !important;
+            }
+            #searchIcon{
+                font-size: larger !important;
+                position: absolute;
+                right:  14px;
+                top: 8px;
+            }
+            .hero img{
+                height: 10rem;
+                margin: 5rem 0 0;
+            }
+            .hero h1{
+                margin: 1rem 0;
+            }
+            .track-card{
+                display: flex;
+                flex-direction: column;
+            }
+            .track-card .content{
+                display: flex;
+                justify-content: left;
+                align-items: center;
+                cursor: pointer !important;
+                padding: 1rem;
+            }
+            .track-card .artwork{
+                align-self: baseline;
+                display: flex;
+                flex-direction: column;
+            }
+            .track-card .meta{
+                align-self: center !important;
+                margin-left: 1rem;
+            }
+            .btn-listen{
+                margin: -2rem 1rem 0 !important;
+                background-color: #d35351 !important;
+                color: white !important;
+                border: none !important;
+                font-weight: bolder !important;
+                user-select: none !important;
+            }
+            .text-echo{
+                color: #e26563 !important;
+            }
+            .text-echo:hover,
+            .text-echo:focus,
+            .text-echo:active{
+                color: #eb7977 !important;
+                text-decoration: underline !important;
+            }
+            .btn-listen:hover{
+                background-color: #cc504e !important;
+                }
+            .btn-listen:focus,
+            .btn-listen:active{
+                background-color: #e26563 !important;
+                box-shadow: #e26563 0px 1px 10px;
+            }
+            .btn-share{
+                margin: .3rem 0 !important;
+            }
+            #search{
+                border: 5px solid silver !important;
+            }
+            .form-control:active,
+            .form-control:focus{
+                box-shadow: none !important;
+            }
+
+            /* large Screen */
+            @media only screen and (min-width: 991px) {
+                .track-card .content{
+                    margin: 0 20% !important;
+                }
+                #search{
+                    max-width: 50rem;
+                    margin:  0 15rem;
+                }
+                #searchIcon{
+                    right: 17rem;
+                }
+                .artworkImg{
+                    height: 150px;
+                }
+                .trackName{
+                    font-size: 28px;
+                }
+                .artistName{
+                    font-size: 20px;
+                }
+            }
+            /* Small Screen */
+            @media only screen and (max-width: 991px) {
+                .track-card button{
+                    margin-top: -2rem !important;
+                    margin: -1rem 1rem 0;
+                }
+                .trackName{
+                    font-size: 24px;
+                }
+                .artistName{
+                    font-size: 18px;
+                }
+                .artworkImg{
+                    height: 120px !important;
+                }
+            }
+            /*Extra Small Screen */
+            @media only screen and (max-width: 440px) {
+                .track-card button{
+                    margin-top: -2rem !important;
+                    margin: -2rem 1rem 0;
+                }
+                .trackName{
+                    font-size: 18px;
+                }
+                .artistName{
+                    font-size: 14px;
+                }
+                .artworkImg{
+                    height: 100px !important;
+                }
+            }
+
+            @media only screen and (max-width: 300px) {
+                .trackName{
+                    font-size: 16px;
+                }
+            }
+
+            /* ScrollTop */
+            #scrollTop {
+                    background-color: #d35351;
+                    width: 45px;
+                    height: 45px;
+                    text-align: center;
+                    font-size: 28px;
+                    color: white;
+                    border-radius: 8px;
+                    position: fixed;
+                    bottom: 30px;
+                    right: 30px;
+                    transition: background-color .3s, 
+                        opacity .5s, visibility .5s;
+                    opacity: 0;
+                    visibility: hidden;
+                    z-index: 1000;
+            }
+            #scrollTop:hover {
+                    cursor: pointer;
+                    background-color: #e26563;
+            }
+            #scrollTop:active {
+                    background-color: #cc504e;
+                    box-shadow: #e26563 0px 1px 10px;
+            }
+            #scrollTop.show {
+                    opacity: 1;
+                    visibility: visible;
+            }
+            /* Github Ribbon */
+            .github-ribbon{ 
+                font-size: 2.05rem !important;
+                box-sizing: border-box;
+                text-decoration: none;
+                position: sticky !important;
+                top: 0;
+                z-index: 99999;
+                right: 0px;
+            }
+            .social-icons .social-icon{
+                font-size: 24px;
+                padding: .5rem .8rem;
+                border-radius: 50%;
+                object-fit: cover;
+                object-position: center right;
+            }
+
+    </style>
+</head>
+<body class="bg-echo">
+    <a tabindex="0" href="https://github.com/imradhe/echodb" rel="noopener noreferrer" target="_blank" class="github-corner d-none d-lg-block" aria-label="View source on GitHub">
+         <svg width="80" height="80" viewBox="0 0 250 250" style="
+             fill: #151513;
+             color: #fff;
+             position: absolute;
+             top: 0;
+             border: 0;
+             right: 0;
+           " aria-hidden="true">
+           <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+           <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+           <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+         </svg>
+       </a> 
+    <div class="container flex justify-content-center">
+            <div class="text-white text-center hero"><img class="img-fluid" src="echo.png" alt="" loading="lazy"><h1>Echo DB <i class="bi bi-music-note-list"></i>
+                <button class="btn btn-listen btn-sm rounded-pill btn-share align-middle" data-bs-toggle="modal" data-bs-target="#shareModal"><i class="bi bi-share-fill"></i> Share</button> </h1>
+            <h3>Search for the song you like... </h3>
+            <p class="d-none d-lg-block shortcuts"><span class="badge bg-dark">ctrl</span> + <span class="badge bg-dark">F</span> = Focus Search Bar, <span class="badge bg-dark">Enter ↵</span> = Submit Search</p>
+            </div>
+                <div class="input-group">
+                    <input type="search" id="search" class="form-control rounded-pill" autocomplete="off">
+                    <i class="bi bi-search" id="searchIcon"></i>
+                </div>
+                <div class="text-center mt-4"><button class="btn btn-listen rounded-pill" id="searchBtn">Search</button></div>
+                
+    </div>
+    <footer class="text-center text-white"><strong>&copy; Echo DB <span class="currentYear"></span><br>Developed by <a href="http://beinghuman.myartsonline.com" class="text-echo" rel="noopener noreferrer" target="_blank">Radhe Shyam Salopanthula</a></strong></footer>
+    <div class="container mt-5">
+        <h3 class="text-center"><b class="border-bottom border-3 text-white resultTitle"></b></h3>
+        <div class="results">
+        </div>
+        <div class="modals">
+            
+        </div>
+  
+  <!--Share Modal -->
+  <div class="modal fade mt-5" id="shareModal" tabindex="-1" aria-labelledby="shareLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="shareLabel">Share</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="text-center mb-5">
+              <h4><b>Share this web App with your friends</b></h4>
+              <ul class="social-icons list-inline mt-3">
+                <li class="social-icon list-inline-item bg-echo"><a href="#" class="bi bi-whatsapp text-white" target="_blank"></a></li>
+                <li class="social-icon list-inline-item bg-echo text-white"><a href="#" class="bi bi-facebook text-white" target="_blank"></a></li>
+                <li class="social-icon list-inline-item bg-echo text-white"><a href="#" class="bi bi-twitter text-white" target="_blank"></a></li>
+                <li class="social-icon list-inline-item bg-echo text-white"><a href="#" class="bi bi-linkedin text-white" target="_blank"></a></li>
+              </ul>
+          </div>
+            <div class="input-group">
+              <input type="url" class="form-control" id="shareUrl" readonly>
+              <button class="btn btn-danger" type="button" id="copyBtn">copy</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- 
+        <div class="results">
+            <div class="track-card">
+                    <div class="content"data-bs-toggle="modal" data-bs-target="#track1">
+                            <div class="artwork"><img class="artworkImg" src="https://via.placeholder.com/100">
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#track1" class="btn btn-listen">Listen</button>
+                            </div>
+                            <div class="meta">
+                                <h5><b class="trackName">Track Name</a></b></h5>
+                                <h5 class="artistName">Artist Name</h5>
+                            </div>
+                        </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="track1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog"><div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Listen Now</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <iframe loading="lazy" width="100%" height="300" src="https://embed.song.link/?url=https://music.apple.com/us/album/imagine/1440853752?i=1440853776&amp;uo=4&amp;theme=light" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-presentation allow-popups allow-popups-to-escape-sandbox"></iframe>
+                <div class="accordion" id="details">
+                    <div class="accordion-item"> 
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1"> Song Details</button></h2>
+                            <div id="collapse1" class="accordion-collapse hide collapse hide" aria-labelledby="headingOne" data-bs-parent="#details">
+                                <div class="accordion-body">
+                                    <table class="table"><tbody><tr><td>Song</td><td>Mark</td></tr><tr><td>Album</td><td>Mark</td></tr><tr><td>Artist</td><td>Mark</td></tr><tr><td>Genre</td><td>Mark</td></tr><tr><td>Release Date</td><td>Mark</td></tr></tbody></table>
+                                    <ul>
+                                        <li>Song - Imagine</li
+                                            ><li>Album - Imagine</li>
+                                            <li>Artist(s) - John Lennon</li>
+                                            <li>Genre - Pop</li>
+                                            <li>Release Date - Thu Sep 09 1971</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    
+    <a id="scrollTop" class="bi bi-caret-up-fill"></a>
+
+    <script>
+            var currentYearSpan = document.querySelector(".currentYear")
+            var currentDate = new Date() 
+            var currentYear = currentDate.getFullYear()
+            currentYearSpan.innerHTML = currentYear
+            var searchInput = document.querySelector('#search')
+            var searchBtn = document.querySelector("#searchBtn")
+            var shortcutsModal = document.querySelector("#shortcutsModal")
+            var shareUrl = document.querySelector("#shareUrl") 
+            var copyBtn = document.querySelector("#copyBtn")
+            var whatsapp = document.querySelector(".bi-whatsapp")
+            var facebook = document.querySelector(".bi-facebook")
+            var twitter = document.querySelector(".bi-twitter")
+            var linkedin = document.querySelector(".bi-linkedin")
+                var getUrl =  window.location.href
+                shareUrl.value = getUrl
+                
+            searchBtn.addEventListener('click', function(){                
+                    var request = new XMLHttpRequest()
+                    var trackCard = document.querySelector(".results")
+                    var modals = document.querySelector(".modals")
+                    var resultTitle = document.querySelector('.resultTitle')
+                    var searchUrl = 'https://itunes.apple.com/search?term='+searchInput.value+"&entity=song&limit=20"
+                    request.open('GET', searchUrl, true)
+                    request.onload = function () {
+                    // Begin accessing JSON data here
+                    var data = JSON.parse(this.response)
+                        resultTitle.innerHTML = ""
+                        trackCard.innerHTML = ""
+                        modals.innerHTML = ""
+
+                    if (request.status >= 200 && request.status < 400) {        
+                            if(data.resultCount == 0){
+                                resultTitle.innerHTML += "<p class='border-none'>No Results found<br>Check the spelling and try again</p>"
+                            }else{
+                                for (var i = 0; i < data.resultCount; i++) {
+                                        trackCard.innerHTML += '<div class="track-card"><div class="content"data-bs-toggle="modal" data-bs-target="#track'+(i+1)+'"><div class="artwork"><img class="artworkImg" height="150px" src="'+data.results[i].artworkUrl100+'" alt="'+data.results[i].trackName+'\'s artwork"><button type="button" data-bs-toggle="modal" data-bs-target="#track'+(i+1)+'" class="btn btn-listen">Listen</button></div><div class="meta"><h5><b class="trackName">'+data.results[i].trackName+'</a></b></h5><h5 class="artistName">'+data.results[i].artistName+'</h5></div></div>'
+                                        }
+                                for (var i = 0; i < data.resultCount; i++) {
+                                        var releaseDateFull = new Date(data.results[i].releaseDate)
+                                        var releaseDate = String(releaseDateFull).substr(0,15)
+                                        modals.innerHTML += '<div class="modal fade" id="track'+(i+1)+'" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Listen Now</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><iframe loading="lazy" width="100%" height="300" src="https://embed.song.link/?url='+data.results[i].trackViewUrl+'&theme=light" frameborder="0" allowfullscreen sandbox="allow-same-origin allow-scripts allow-presentation allow-popups allow-popups-to-escape-sandbox"></iframe><div class="accordion" id="details"><div class="accordion-item"> <h2 class="accordion-header" id="headingOne"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse'+(i+1)+'" aria-expanded="false" aria-controls="collapse'+(i+1)+'"> Song Details</button></h2><div id="collapse'+(i+1)+'" class="accordion-collapse collapse hide" aria-labelledby="headingOne" data-bs-parent="#details"><div class="accordion-body"><table class="table"><tbody><tr><td>Song</td><td>'+data.results[i].trackName+'</td></tr><tr><td>Album</td><td>'+data.results[i].collectionName+'</td></tr><tr><td>Artist</td><td>'+data.results[i].artistName+'</td></tr><tr><td>Genre</td><td>'+data.results[i].primaryGenreName+'</td></tr><tr><td>Release Date</td><td>'+releaseDate+'</td></tr></tbody></table></div></div></div></div></div></div></div></div>'
+                                        }  
+                                resultTitle.innerHTML += "Results ("+i+")"
+                            }                                
+
+                    } else {
+                        console.log('error')
+                    }
+                    }
+
+                    request.send()        
+            })
+
+                whatsapp.href = "https://wa.me/?text=Check out Echo DB. *Echo DB* is a web app to search and listen to any song you like on any platform you love. Search, Listen and Enjoy! "+getUrl
+                facebook.href = "https://www.facebook.com/sharer/sharer.php?u="+getUrl+"&quote=Check out Echo DB. Echo DB is a web app to search and listen to any song you like on any platform you love. Search, Listen and Enjoy!"
+                twitter.href = "https://twitter.com/intent/tweet?text=Check out Echo DB. Echo DB is a web app to search and listen to any song you like on any platform you love. Search, Listen and Enjoy! by @beinghumanmuzic&url="+getUrl
+                linkedin.href = "https://www.linkedin.com/cws/share?url="+getUrl
+                copyBtn.addEventListener('click',function(){
+                    shareUrl.select()
+                    shareUrl.setSelectionRange(0, 99999)
+                    document.execCommand("copy")               
+                    copyBtn.innerHTML = "Copied!"
+                    setTimeout(function(){ copyBtn.innerHTML="copy" }, 1000)
+                })
+            
+             addEventListener("keydown",function(e){
+                 if(e.ctrlKey && e.keyCode == "70"){
+                      e.preventDefault()
+                      searchInput.focus()
+                    }
+                 if(e.keyCode == "13"){
+                     e.preventDefault()
+                     searchBtn.click()
+                 }
+             })
+            //ScrollTop
+            var scrollTopbtn = $('#scrollTop');	
+
+                $(window).scroll(function() {
+                if ($(window).scrollTop() > 300) {
+                    scrollTopbtn.addClass('show');
+                } else {
+                    scrollTopbtn.removeClass('show');
+                }
+                });
+
+                scrollTopbtn.on('click', function(e) {
+                e.preventDefault();
+                $('html, body').animate({scrollTop:0}, '300');
+                });
+    </script>
+</body>
+</html>inks to that song on any platform you love. Search, Listen and Enjoy."/>
 		<meta property="og:locale" content="en_US" />
 		<meta property="og:site_name" content="Echo DB"/>
 		<meta property="og:image:type" content="image/png"/>
