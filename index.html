@@ -359,7 +359,7 @@
                     var trackCard = document.querySelector(".results")
                     var modals = document.querySelector(".modals")
                     var resultTitle = document.querySelector('.resultTitle')
-                    var searchUrl = 'https://itunes.apple.com/search?term='+searchInput.value+"&entity=song&limit=20"
+                    var searchUrl = 'http://itunes.apple.com/search?term='+searchInput.value+"&entity=song&limit=20"
                     request.open('GET', searchUrl, true)
                     request.onload = function () {
                     // Begin accessing JSON data here
@@ -373,12 +373,25 @@
                                 resultTitle.innerHTML += "<p class='border-none'>No Results found<br>Check the spelling and try again</p>"
                             }else{
                                 for (var i = 0; i < data.resultCount; i++) {
-                                        trackCard.innerHTML += '<div class="track-card"><div class="content"data-bs-toggle="modal" data-bs-target="#track'+(i+1)+'"><div class="artwork"><img class="artworkImg" height="150px" src="'+data.results[i].artworkUrl100+'" alt="'+data.results[i].trackName+'\'s artwork"><button type="button" data-bs-toggle="modal" data-bs-target="#track'+(i+1)+'" class="btn btn-listen">Listen</button></div><div class="meta"><h5><b class="trackName">'+data.results[i].trackName+'</a></b></h5><h5 class="artistName">'+data.results[i].artistName+'</h5></div></div>'
+
+                                        var trackName = data.results[i].trackName
+                                        var artworkUrl = data.results[i].artworkUrl100
+                                        var artistName = data.results[i].artistName
+
+                                        trackCard.innerHTML += '<div class="track-card"><div class="content"data-bs-toggle="modal" data-bs-target="#track'+(i+1)+'"><div class="artwork"><img class="artworkImg" height="150px" src="'+artworkUrl+'" alt="'+trackName+'\'s artwork"><button type="button" data-bs-toggle="modal" data-bs-target="#track'+(i+1)+'" class="btn btn-listen">Listen</button></div><div class="meta"><h5><b class="trackName">'+trackName+'</a></b></h5><h5 class="artistName">'+artistName+'</h5></div></div>'
                                         }
                                 for (var i = 0; i < data.resultCount; i++) {
+                                    
+                                        var trackName = data.results[i].trackName
+                                        var artworkUrl = data.results[i].artworkUrl100
+                                        var artistName = data.results[i].artistName
+                                        var albumName = data.results[i].collectionName
+                                        var primaryGenre = data.results[i].primaryGenreName
+                                        var trackUrl = data.results[i].trackViewUrl
                                         var releaseDateFull = new Date(data.results[i].releaseDate)
                                         var releaseDate = String(releaseDateFull).substr(0,15)
-                                        modals.innerHTML += '<div class="modal fade" id="track'+(i+1)+'" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Listen Now</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><iframe loading="lazy" width="100%" height="300" src="https://embed.song.link/?url='+data.results[i].trackViewUrl+'&theme=light" frameborder="0" allowfullscreen sandbox="allow-same-origin allow-scripts allow-presentation allow-popups allow-popups-to-escape-sandbox"></iframe><div class="accordion" id="details"><div class="accordion-item"> <h2 class="accordion-header" id="headingOne"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse'+(i+1)+'" aria-expanded="false" aria-controls="collapse'+(i+1)+'"> Song Details</button></h2><div id="collapse'+(i+1)+'" class="accordion-collapse collapse hide" aria-labelledby="headingOne" data-bs-parent="#details"><div class="accordion-body"><table class="table"><tbody><tr><td>Song</td><td>'+data.results[i].trackName+'</td></tr><tr><td>Album</td><td>'+data.results[i].collectionName+'</td></tr><tr><td>Artist</td><td>'+data.results[i].artistName+'</td></tr><tr><td>Genre</td><td>'+data.results[i].primaryGenreName+'</td></tr><tr><td>Release Date</td><td>'+releaseDate+'</td></tr></tbody></table></div></div></div></div></div></div></div></div>'
+
+                                        modals.innerHTML += '<div class="modal fade" id="track'+(i+1)+'" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Listen Now</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><iframe loading="lazy" width="100%" height="300" src="https://embed.song.link/?url='+trackUrl+'&theme=light" frameborder="0" allowfullscreen sandbox="allow-same-origin allow-scripts allow-presentation allow-popups allow-popups-to-escape-sandbox"></iframe><div class="accordion" id="details"><div class="accordion-item"> <h2 class="accordion-header" id="headingOne"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse'+(i+1)+'" aria-expanded="false" aria-controls="collapse'+(i+1)+'"> Song Details</button></h2><div id="collapse'+(i+1)+'" class="accordion-collapse collapse hide" aria-labelledby="headingOne" data-bs-parent="#details"><div class="accordion-body"><table class="table"><tbody><tr><td>Song</td><td>'+trackName+'</td></tr><tr><td>Album</td><td>'+albumName+'</td></tr><tr><td>Artist</td><td>'+artistName+'</td></tr><tr><td>Genre</td><td>'+primaryGenre+'</td></tr><tr><td>Release Date</td><td>'+releaseDate+'</td></tr></tbody></table></div></div></div></div></div></div></div></div>'
                                         }  
                                 resultTitle.innerHTML += "Results ("+i+")"
                             }                                
