@@ -1,0 +1,48 @@
+function updateURL(songName = "", artistName = "") {
+  return `https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?format=jsonp&callback=searchLyrics&q_track=${songName}&q_artist=${artistName}&apikey=f90cd35582c176dbcfd3ecebcc227390`;
+}
+
+let submitButton = document.querySelector(".submit");
+
+submitButton.onclick = function () {
+  //getting song name and replacing space with %20
+  let song_name = document.querySelector(".song").value;
+  song_name = song_name.replace(/ /g, "%20");
+
+  //getting artist name and replacing space with %20
+  let artist_name = document.querySelector(".artist").value;
+  artist_name = artist_name.replace(/ /g, "%20");
+
+  // getting new url
+  let newURL = updateURL(song_name, artist_name);
+  // console.log(newURL);
+
+  updateScript(newURL);
+
+  document.querySelector(".song").value = "";
+  document.querySelector(".artist").value = "";
+};
+
+function updateScript(url) {
+  let newScript = document.createElement("script");
+  newScript.src = url;
+  newScript.setAttribute("id", "head-script");
+
+  let oldScript = document.getElementById("head-script");
+  let head = document.getElementsByTagName("head")[0];
+
+  if (oldScript === null) {
+    head.appendChild(newScript);
+  } else {
+    head.replaceChild(newScript, oldScript);
+  }
+}
+
+function searchLyrics(object) {
+  if (object.message.header.status_code === 404) {
+    document.querySelector(".lyrics").textContent = "lyrics not found";
+  } else {
+    document.querySelector(".lyrics").textContent =
+      object.message.body.lyrics.lyrics_body;
+  }
+}
