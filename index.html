@@ -377,7 +377,7 @@
                     var trackCard = document.querySelector(".results")
                     var modals = document.querySelector(".modals")
                     var resultTitle = document.querySelector('.resultTitle')
-                    var searchUrl = 'http://itunes.apple.com/search?term='+searchInput.value+"&entity=song&limit=20"
+                    var searchUrl = 'https://itunes.apple.com/search?term='+searchInput.value+"&entity=song&limit=20"
                     request.open('GET', searchUrl, true)
                     request.onload = function () {
                     // Begin accessing JSON data here
