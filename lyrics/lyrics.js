@@ -91,14 +91,10 @@ function updateURL(songName = "") {
       document.querySelector(".results").innerHTML ='<thead><tr> <th scope="col">#</th><th scope="col">Song</th><th scope="col">Artist</th><th scope="col">Lyrics</th></tr></thead>';
       var i = 0;
       object.message.body.track_list.forEach(element => {
-        document.querySelector(".results").innerHTML += '<tr><th scope="row">'+(i+1)+'</th><td>'+element.track.track_name+'</td><td>'+element.track.artist_name+'</td><td><button type="button" data-bs-toggle="modal" data-bs-target="#track'+(i+1)+'" class="btn btn-danger">Lyrics</button></td></tr>';        
+        document.querySelector(".results").innerHTML += '<tr><th scope="row">'+(i+1)+'</th><td>'+element.track.track_name+'</td><td>'+element.track.artist_name+'</td><td><a href="'+element.track.track_share_url.substring(0,(element.track.track_share_url.length - 75))+'" class="btn btn-danger">Lyrics</a></td></tr>';        
         i++;
       });
       i =0;
       document.querySelector(".modals").innerHTML = ""
-      object.message.body.track_list.forEach(element => {
-        document.querySelector(".modals").innerHTML += '<div class="modal fade" id="track'+(i+1)+'" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Listen Now</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><iframe loading="lazy" width="100%" height="300" src="'+element.track.track_share_url.substring(0,(element.track.track_share_url.length - 75))+'/embed?theme=light" style="border:none;background:transparent;" width="100%" height="380" border=0></iframe></div></div></div></div>';        
-        i++;
-      });
     }
   }
