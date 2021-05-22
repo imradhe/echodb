@@ -91,7 +91,7 @@ function updateURL(songName = "") {
       document.querySelector(".results").innerHTML ='<thead><tr> <th scope="col">#</th><th scope="col">Song</th><th scope="col">Artist</th><th scope="col">Lyrics</th></tr></thead>';
       var i = 0;
       object.message.body.track_list.forEach(element => {
-        document.querySelector(".results").innerHTML += '<tr><th scope="row">'+(i+1)+'</th><td>'+element.track.track_name+'</td><td>'+element.track.artist_name+'</td><td><a href="'+element.track.track_share_url.substring(0,(element.track.track_share_url.length - 75))+'" class="btn btn-danger">Lyrics</a></td></tr>';        
+        document.querySelector(".results").innerHTML += '<tr><th scope="row">'+(i+1)+'</th><td>'+element.track.track_name+'</td><td>'+element.track.artist_name+'</td><td><a target="_blank" href="'+element.track.track_share_url.substring(0,(element.track.track_share_url.length - 75))+'" class="btn btn-danger">Lyrics</a></td></tr>';        
         i++;
       });
       i =0;
