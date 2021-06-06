@@ -271,7 +271,6 @@
     <footer class="text-center text-white"><strong>&copy; Echo DB <span class="currentYear"></span><br>Developed by <a href="http://beinghuman.myartsonline.com" class="text-echo" rel="noopener noreferrer" target="_blank">Radhe Shyam Salopanthula</a></strong></footer>
     <div class="container mt-5">
         <h3 class="text-center"><b class="border-bottom border-3 text-white resultTitle"></b></h3>
-        <div class="loading"></div>
         <div class="results">
         </div>
         <div class="modals">
@@ -304,6 +303,7 @@
       </div>
     </div>
   </div>
+
     
     <a id="scrollTop" class="bi bi-caret-up-fill"></a>
 
@@ -336,7 +336,6 @@
              
             searchBtn.addEventListener('click', function(){                
                     var request = new XMLHttpRequest()
-                    var loading = document.querySelector(".loading")
                     var trackCard = document.querySelector(".results")
                     var modals = document.querySelector(".modals")
                     var resultTitle = document.querySelector('.resultTitle')
@@ -354,14 +353,16 @@
                             if(data.resultCount == 0){
                                 resultTitle.innerHTML += "<p class='border-none'>No Results found<br>Check the spelling and try again</p>"
                             }else{
-                                        loading.innerHTML = '<div class="d-flex justify-content-center mt-1-"><div class="spinner-grow text-echo fs-1" role="status"><span class="visually-hidden">Loading...</span></div></div>'
+                                        searchBtn.innerHTML = 'Loading <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span><span class="visually-hidden">Loading...</span>'
+                                        searchBtn.disabled = true
                                         setTimeout(() => {
                                 for (var i = 0; i < data.resultCount; i++) {
 
                                         var trackName = data.results[i].trackName
                                         var artworkUrl = data.results[i].artworkUrl100
                                         var artistName = data.results[i].artistName
-                                        loading.innerHTML = ''
+                                        searchBtn.innerHTML = 'Search'
+                                        searchBtn.disabled = false
                                         trackCard.innerHTML += '<div class="track-card"><div class="content"data-bs-toggle="modal" data-bs-target="#track'+(i+1)+'"><div class="artwork"><img class="artworkImg" height="150px" src="'+artworkUrl+'" alt="'+trackName+'\'s artwork"><button type="button" data-bs-toggle="modal" data-bs-target="#track'+(i+1)+'" class="btn btn-listen">Listen</button></div><div class="meta"><h5><b class="trackName">'+trackName+'</a></b></h5><h5 class="artistName">'+artistName+'</h5></div></div>'
                                         }
                                 for (var i = 0; i < data.resultCount; i++) {
