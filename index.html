@@ -304,52 +304,6 @@
       </div>
     </div>
   </div>
-
-<!-- 
-        <div class="results">
-            <div class="track-card">
-                    <div class="content"data-bs-toggle="modal" data-bs-target="#track1">
-                            <div class="artwork"><img class="artworkImg" src="https://via.placeholder.com/100">
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#track1" class="btn btn-listen">Listen</button>
-                            </div>
-                            <div class="meta">
-                                <h5><b class="trackName">Track Name</a></b></h5>
-                                <h5 class="artistName">Artist Name</h5>
-                            </div>
-                        </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="track1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog"><div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Listen Now</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <iframe loading="lazy" width="100%" height="300" src="https://embed.song.link/?url=https://music.apple.com/us/album/imagine/1440853752?i=1440853776&amp;uo=4&amp;theme=light" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-presentation allow-popups allow-popups-to-escape-sandbox"></iframe>
-                <div class="accordion" id="details">
-                    <div class="accordion-item"> 
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1"> Song Details</button></h2>
-                            <div id="collapse1" class="accordion-collapse hide collapse hide" aria-labelledby="headingOne" data-bs-parent="#details">
-                                <div class="accordion-body">
-                                    <table class="table"><tbody><tr><td>Song</td><td>Mark</td></tr><tr><td>Album</td><td>Mark</td></tr><tr><td>Artist</td><td>Mark</td></tr><tr><td>Genre</td><td>Mark</td></tr><tr><td>Release Date</td><td>Mark</td></tr></tbody></table>
-                                    <ul>
-                                        <li>Song - Imagine</li
-                                            ><li>Album - Imagine</li>
-                                            <li>Artist(s) - John Lennon</li>
-                                            <li>Genre - Pop</li>
-                                            <li>Release Date - Thu Sep 09 1971</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
     
     <a id="scrollTop" class="bi bi-caret-up-fill"></a>
 
@@ -423,7 +377,7 @@
 
                                         modals.innerHTML += '<div class="modal fade" id="track'+(i+1)+'" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Listen Now</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><iframe loading="lazy" width="100%" height="300" src="https://embed.song.link/?url='+trackUrl+'&theme=light" frameborder="0" allowfullscreen sandbox="allow-same-origin allow-scripts allow-presentation allow-popups allow-popups-to-escape-sandbox"></iframe><div class="accordion" id="details"><div class="accordion-item"> <h2 class="accordion-header" id="headingOne"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse'+(i+1)+'" aria-expanded="false" aria-controls="collapse'+(i+1)+'"> Song Details</button></h2><div id="collapse'+(i+1)+'" class="accordion-collapse collapse hide" aria-labelledby="headingOne" data-bs-parent="#details"><div class="accordion-body"><table class="table"><tbody><tr><td>Song</td><td>'+trackName+'</td></tr><tr><td>Album</td><td>'+albumName+'</td></tr><tr><td>Artist</td><td>'+artistName+'</td></tr><tr><td>Genre</td><td>'+primaryGenre+'</td></tr><tr><td>Release Date</td><td>'+releaseDate+'</td></tr></tbody></table></div></div></div></div></div></div></div></div>'
                                         }  
-                                resultTitle.innerHTML += "Results ("+i+")"
+                                resultTitle.innerHTML = "Results ("+i+")"
 
 }, 2000);
                             }                                
