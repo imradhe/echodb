@@ -403,7 +403,7 @@
                                         var artworkUrl = data.results[i].artworkUrl100
                                         var artistName = data.results[i].artistName
 
-                                        trackCard.innerHTML += '<div class="track-card"><div class="content"data-bs-toggle="modal" data-bs-target="#track'+(i+1)+'"><div class="artwork"><img class="artworkImg" height="150px" src="'+artworkUrl+'" alt="'+trackName+'\'s artwork"><button type="button" data-bs-toggle="modal" data-bs-target="#track'+(i+1)+'" class="btn btn-listen"><i class="bi bi-play-fill"></i></button></div><div class="meta"><h5><b class="trackName">'+trackName+'</a></b></h5><h5 class="artistName">'+artistName+'</h5></div></div>'
+                                        trackCard.innerHTML += '<div class="track-card"><div class="content"data-bs-toggle="modal" data-bs-target="#track'+(i+1)+'"><div class="artwork"><img class="artworkImg" height="150px" src="'+artworkUrl+'" alt="'+trackName+'\'s artwork"><button type="button" data-bs-toggle="modal" data-bs-target="#track'+(i+1)+'" class="btn btn-listen">Listen</button></div><div class="meta"><h5><b class="trackName">'+trackName+'</a></b></h5><h5 class="artistName">'+artistName+'</h5></div></div>'
                                         }
                                 for (var i = 0; i < data.resultCount; i++) {
 
