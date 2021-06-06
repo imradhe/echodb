@@ -33,7 +33,7 @@
 	    -webkit-scrollbar-thumb
 		{
 			border-radius: 10px;
-			-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+			box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 			background-color: #D62929;
 		}
 
@@ -271,6 +271,7 @@
     <footer class="text-center text-white"><strong>&copy; Echo DB <span class="currentYear"></span><br>Developed by <a href="http://beinghuman.myartsonline.com" class="text-echo" rel="noopener noreferrer" target="_blank">Radhe Shyam Salopanthula</a></strong></footer>
     <div class="container mt-5">
         <h3 class="text-center"><b class="border-bottom border-3 text-white resultTitle"></b></h3>
+        <div class="loading"></div>
         <div class="results">
         </div>
         <div class="modals">
@@ -381,6 +382,7 @@
              
             searchBtn.addEventListener('click', function(){                
                     var request = new XMLHttpRequest()
+                    var loading = document.querySelector(".loading")
                     var trackCard = document.querySelector(".results")
                     var modals = document.querySelector(".modals")
                     var resultTitle = document.querySelector('.resultTitle')
@@ -394,15 +396,18 @@
                         modals.innerHTML = ""
 
                     if (request.status >= 200 && request.status < 400) {        
+			    
                             if(data.resultCount == 0){
                                 resultTitle.innerHTML += "<p class='border-none'>No Results found<br>Check the spelling and try again</p>"
                             }else{
+                                        loading.innerHTML = '<div class="d-flex justify-content-center m-3"><div class="spinner-grow text-echo" role="status"><span class="visually-hidden">Loading...</span></div></div>'
+                                        setTimeout(() => {
                                 for (var i = 0; i < data.resultCount; i++) {
 
                                         var trackName = data.results[i].trackName
                                         var artworkUrl = data.results[i].artworkUrl100
                                         var artistName = data.results[i].artistName
-
+                                        loading.innerHTML = ''
                                         trackCard.innerHTML += '<div class="track-card"><div class="content"data-bs-toggle="modal" data-bs-target="#track'+(i+1)+'"><div class="artwork"><img class="artworkImg" height="150px" src="'+artworkUrl+'" alt="'+trackName+'\'s artwork"><button type="button" data-bs-toggle="modal" data-bs-target="#track'+(i+1)+'" class="btn btn-listen">Listen</button></div><div class="meta"><h5><b class="trackName">'+trackName+'</a></b></h5><h5 class="artistName">'+artistName+'</h5></div></div>'
                                         }
                                 for (var i = 0; i < data.resultCount; i++) {
@@ -419,6 +424,8 @@
                                         modals.innerHTML += '<div class="modal fade" id="track'+(i+1)+'" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Listen Now</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><iframe loading="lazy" width="100%" height="300" src="https://embed.song.link/?url='+trackUrl+'&theme=light" frameborder="0" allowfullscreen sandbox="allow-same-origin allow-scripts allow-presentation allow-popups allow-popups-to-escape-sandbox"></iframe><div class="accordion" id="details"><div class="accordion-item"> <h2 class="accordion-header" id="headingOne"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse'+(i+1)+'" aria-expanded="false" aria-controls="collapse'+(i+1)+'"> Song Details</button></h2><div id="collapse'+(i+1)+'" class="accordion-collapse collapse hide" aria-labelledby="headingOne" data-bs-parent="#details"><div class="accordion-body"><table class="table"><tbody><tr><td>Song</td><td>'+trackName+'</td></tr><tr><td>Album</td><td>'+albumName+'</td></tr><tr><td>Artist</td><td>'+artistName+'</td></tr><tr><td>Genre</td><td>'+primaryGenre+'</td></tr><tr><td>Release Date</td><td>'+releaseDate+'</td></tr></tbody></table></div></div></div></div></div></div></div></div>'
                                         }  
                                 resultTitle.innerHTML += "Results ("+i+")"
+
+}, 2000);
                             }                                
 
                     } else {
