@@ -322,6 +322,10 @@
             var linkedin = document.querySelector(".bi-linkedin")
                 var getUrl =  window.location.href
                 shareUrl.value = getUrl
+	    
+	    searchInput.addEventListener("keydown",function(){
+	    	document.querySelector('title').text = searchInput.value
+	    })
 
             addEventListener("keydown",function(e){
                  if(e.ctrlKey && e.keyCode == "70"){
