@@ -326,20 +326,12 @@
 	    url = new URL(getUrl);
 	    var q = url.searchParams.get("q");
 	    
-	    addEventListener("hover", function(){
-	    if(q != ""){
-	    	searchInput.focus()
-		searchInput.value = q
-	    }
-	    })
 	    searchInput.addEventListener("input",function(){
 		    if(searchInput.value.trim() == ""){
 			document.querySelector('title').text = initialTitle 
-		    	window.location.href = getUrl
 		    }
 		    else
 			document.querySelector('title').text = searchInput.value.trim() +' - '+ initialTitle 
-		    	window.location.href = getUrl+"?q="+searchInput.value.trim().replaceAll(" ", "%20")
 	    })
 
             addEventListener("keydown",function(e){
