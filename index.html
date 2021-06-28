@@ -323,11 +323,15 @@
                 var getUrl =  window.location.href
                 shareUrl.value = getUrl
 	    var initialTitle = "Songs Search - Echo DB"
+	    url = new URL(url_string);
+	    var q = url.searchParams.get("q");
 	    
+	    addEventListener("hover", function(){
 	    if(q != ""){
 	    	searchInput.focus()
 		searchInput.value = q
 	    }
+	    })
 	    searchInput.addEventListener("input",function(){
 		    if(searchInput.value.trim() == ""){
 			document.querySelector('title').text = initialTitle 
