@@ -324,7 +324,7 @@
                 shareUrl.value = getUrl
 	    var initialTitle = "Songs Search - Echo DB"
 	    searchInput.addEventListener("input",function(){
-			document.querySelector('title').text = searchInput.value.trim() + initialTitle 
+			document.querySelector('title').text = searchInput.value.trim() +' '+ initialTitle 
 	    })
 
             addEventListener("keydown",function(e){
