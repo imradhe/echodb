@@ -322,9 +322,12 @@
             var linkedin = document.querySelector(".bi-linkedin")
                 var getUrl =  window.location.href
                 shareUrl.value = getUrl
-	    
+	    var initialTitle = document.querySelector('title').text
 	    searchInput.addEventListener("input",function(){
-	    	document.querySelector('title').text = searchInput.value
+		    if(searchInput.value.trim() == null )
+	    		document.querySelector('title').text = initialTitle
+		    else
+			document.querySelector('title').text = searchInput.value.trim()
 	    })
 
             addEventListener("keydown",function(e){
