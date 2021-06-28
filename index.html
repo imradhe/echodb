@@ -324,7 +324,7 @@
                 shareUrl.value = getUrl
 	    var initialTitle = "Songs Search - Echo DB"
 	    searchInput.addEventListener("input",function(){
-		    if(searchInput.value.trim() == null )
+		    if(searchInput.value.trim() == '' )
 	    		document.querySelector('title').text = initialTitle
 		    else
 			document.querySelector('title').text = searchInput.value.trim()
