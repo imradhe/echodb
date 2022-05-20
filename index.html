@@ -328,6 +328,8 @@
 		    else
 			document.querySelector('title').text = searchInput.value.trim() +' - '+ initialTitle 
 	    })
+	    
+	    searchInput.focus()
 
             addEventListener("keydown",function(e){
                  if(e.ctrlKey && e.keyCode == "70"){
